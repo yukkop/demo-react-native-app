@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './pages/home/Home';
-import { gStyle } from './styles/style';
+import { StyleSheet } from 'react-native';
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
+import Navigate from './Navigate';
 
 const fonts = () => Font.loadAsync({
   'mt-bolt': require('./assets/fonts/Montserrat-Bold.ttf'),
-  'mt-reg': require('./assets/fonts/Montserrat-Regular.ttf')
+  'mt-reg': require('./assets/fonts/Montserrat-Regular.ttf'),
+  'mta-bolt': require('./assets/fonts/MontserratAlternates-Bold.ttf'),
+  'mta-medium': require('./assets/fonts/MontserratAlternates-Medium.ttf')
 })
 
 export default function App() {
@@ -16,10 +17,7 @@ export default function App() {
 
   if (font) {
     return (
-      <View style={styles.container}>
-        <Home />
-        <StatusBar style="auto" />
-      </View>
+      <Navigate />
     );
   }
   else {
@@ -32,9 +30,3 @@ export default function App() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});

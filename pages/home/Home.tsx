@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
-import { gStyle } from '../../styles/style';
-import ListContainer from '../../components/ListContainer';
-import ListItem, { ListItemProps } from '../../components/UI/ListItem';
+import { SafeAreaView, StyleSheet, Text, View, FlatList } from 'react-native';
+import { gStyles } from '../../styles/style';
+import ListItem from '../../components/UI/ListItem';
+import HomeHeader from './HomeHeader'
 
 
-export default function Home() {
+export default function Home({ navigation }) {
     const [chapterList, ListOfCharpter] = useState([
-        { title: "музыка и радио", id: 1 },
+        { title: "Музыка и радио", id: 1 },
         { title: "Фильмы, ролики, телепрограммы", id: 2 },
         { title: "Развлечения, игры, уроки", id: 3 },
         { title: "Напоминания, будильники, таймеры", id: 4 },
@@ -16,24 +16,31 @@ export default function Home() {
         { title: "Умный дом", id: 6 }
     ]);
 
-    const openPage = () => {
-
-    }
+    const openPage = (name) => navigation.navigate(name);
 
     const renderItem = ({ item }) => (
-        <ListItem title={item.title} />
+        <ListItem title={item.title} name={item.name} openPage={openPage} />
     );
 
     return (
         <SafeAreaView style={styles.Home}>
-            <Text style={gStyle.title}>This is home page</Text>
-            <Text style={[gStyle.title, { fontSize: 22 }]}>Внимание. Не забудьте активировать Станцию перед тем, как попросить Алису помочь вам. Для этого скажите «Алиса» или нажмите кнопку активации</Text>
-            <View >
-                <FlatList
-                    data={chapterList}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                />
+            <StatusBar style="auto" />
+            { /* <HomeHeader /> */}
+            <FlatList
+                style={{ flex: 5, marginTop: 10 }}
+                data={chapterList}
+                renderItem={renderItem}
+                keyExtractor={item => item.id.toString()}
+            />
+            <View style={styles.floor}>
+                <Text style={gStyles.text_conteiner}>
+                    <Text style={styles.text_highligt}>
+                        {"Внимание. "}
+                    </Text>
+                    <Text style={styles.text_context}>
+                        {"Не забудьте активировать Станцию перед тем, как попросить Алису помочь вам. Для этого скажите «Алиса» или нажмите кнопку активации"}
+                    </Text>
+                </Text>
             </View>
         </SafeAreaView>
     )
@@ -58,7 +65,12 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
     },
-    title: {
-        fontSize: 32,
+    text_context: {
+    },
+    text_highligt: {
+        color: 'red'
+    },
+    floor: {
+        height: '16%',
     },
 });
