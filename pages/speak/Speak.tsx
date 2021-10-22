@@ -5,10 +5,10 @@ import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
 
-import { items } from '../../resources/music-content.json'
+import { items } from '../../resources/speak-content.json'
 
 
-export default function Music({ navigation }) {
+export default function Speak({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,

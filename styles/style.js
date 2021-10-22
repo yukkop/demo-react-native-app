@@ -11,7 +11,7 @@ export const gStyles = StyleSheet.create({
     },
     text_conteiner: {
         marginHorizontal: 20,
-        textAlign: 'justify',
+        textAlign: 'left',
         fontSize: 14
     },
 });

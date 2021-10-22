@@ -5,10 +5,10 @@ import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
 
-import { items } from '../../resources/music-content.json'
+import { items } from '../../resources/movie-content.json'
 
 
-export default function Music({ navigation }) {
+export default function Movie({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,
@@ -34,7 +34,6 @@ export default function Music({ navigation }) {
         item.isOpen = !item.isOpen;
         setData([item, ...data.filter(item => item.id != id)].sort(compareItemId))
     };
-
     const renderItem = ({ item }) => (
         <TableItem id={item.id} result={item.result} command={item.command} isOpen={item.isOpen} OpenOrCloseDescription={OpenOrCloseDescription} />
     );

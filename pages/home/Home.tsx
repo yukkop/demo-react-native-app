@@ -5,15 +5,19 @@ import { gStyles } from '../../styles/style';
 import ListItem from '../../components/UI/ListItem';
 import HomeHeader from './HomeHeader'
 
+import config from './../../resources/config.json'
+
 
 export default function Home({ navigation }) {
     const [chapterList, ListOfCharpter] = useState([
-        { title: "Музыка и радио", id: 1 },
-        { title: "Фильмы, ролики, телепрограммы", id: 2 },
-        { title: "Развлечения, игры, уроки", id: 3 },
-        { title: "Напоминания, будильники, таймеры", id: 4 },
-        { title: "Сервисы, покупки, рецепты", id: 5 },
-        { title: "Умный дом", id: 6 }
+        { title: config.music, id: 1 },
+        { title: config.movie, id: 2 },
+        { title: config.leisure, id: 3 },
+        { title: config.speak, id: 4 },
+        { title: config.phone, id: 5 },
+        { title: config.reminder, id: 6 },
+        { title: config.shop, id: 7 },
+        { title: config.clever, id: 8 }
     ]);
 
     const openPage = (name) => navigation.navigate(name);
@@ -31,6 +35,7 @@ export default function Home({ navigation }) {
                 data={chapterList}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
+                showsVerticalScrollIndicator={false}
             />
             <View style={styles.floor}>
                 <Text style={gStyles.text_conteiner}>
