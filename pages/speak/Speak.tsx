@@ -14,7 +14,7 @@ export default function Speak({ navigation }) {
             id: index + 1,
             isOpen: false,
             result: current.result,
-            command: current.command
+            commands: current.commands
         });
     }));
 
@@ -36,7 +36,13 @@ export default function Speak({ navigation }) {
     };
 
     const renderItem = ({ item }) => (
-        <TableItem id={item.id} result={item.result} command={item.command} isOpen={item.isOpen} OpenOrCloseDescription={OpenOrCloseDescription} />
+        <TableItem
+            id={item.id}
+            result={item.result}
+            commands={item.commands}
+            isOpen={item.isOpen}
+            OpenOrCloseDescription={OpenOrCloseDescription}
+        />
     );
 
     return (

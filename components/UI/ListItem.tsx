@@ -21,10 +21,11 @@ export default function ListItem({ title, name, openPage }: ListItemProps) {
 
 const styles = StyleSheet.create({
     container: {
-        height: 60,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
-        backgroundColor: '#E7ECF2',
+        backgroundColor: '#FFE076',
+        borderRadius: 25
     }
 });

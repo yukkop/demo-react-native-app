@@ -2,7 +2,9 @@
     "items": [
         {
             "result": "",
-            "command": ""
+            "commands": [
+                ""
+            ]
         }
     ]
 }

@@ -9,6 +9,7 @@ const fonts = () => Font.loadAsync({
   'mt-bolt': require('./assets/fonts/Montserrat-Bold.ttf'),
   'mt-reg': require('./assets/fonts/Montserrat-Regular.ttf'),
   'mta-bolt': require('./assets/fonts/MontserratAlternates-Bold.ttf'),
+  'mta-exbolt': require('./assets/fonts/MontserratAlternates-ExtraBold.ttf'),
   'mta-medium': require('./assets/fonts/MontserratAlternates-Medium.ttf')
 })
 

@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import { gStyles } from '../../styles/style';
 import ListItem from '../../components/UI/ListItem';
 import HomeHeader from './HomeHeader'
+import Popup from '../../components/Popup';
 
 import config from './../../resources/config.json'
 
 
 export default function Home({ navigation }) {
+    const [isPopupOpen, setIsPopupOpen] = useState(true);
+
     const [chapterList, ListOfCharpter] = useState([
         { title: config.music, id: 1 },
         { title: config.movie, id: 2 },
@@ -29,7 +32,6 @@ export default function Home({ navigation }) {
     return (
         <SafeAreaView style={styles.Home}>
             <StatusBar style="auto" />
-            { /* <HomeHeader /> */}
             <FlatList
                 style={{ flex: 5, marginTop: 10 }}
                 data={chapterList}
@@ -38,15 +40,8 @@ export default function Home({ navigation }) {
                 showsVerticalScrollIndicator={false}
             />
             <View style={styles.floor}>
-                <Text style={gStyles.text_conteiner}>
-                    <Text style={styles.text_highligt}>
-                        {"Внимание. "}
-                    </Text>
-                    <Text style={styles.text_context}>
-                        {"Не забудьте активировать Станцию перед тем, как попросить Алису помочь вам. Для этого скажите «Алиса» или нажмите кнопку активации"}
-                    </Text>
-                </Text>
             </View>
+            <Popup isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
         </SafeAreaView>
     )
 }
@@ -70,12 +65,7 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
     },
-    text_context: {
-    },
-    text_highligt: {
-        color: 'red'
-    },
     floor: {
-        height: '16%',
+        height: '8%',
     },
 });

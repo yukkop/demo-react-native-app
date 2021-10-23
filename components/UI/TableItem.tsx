@@ -6,12 +6,12 @@ import { gStyles } from '../../styles/style';
 export type TableItemProps = {
     id: number
     result: string
-    command: string
+    commands: string[]
     isOpen: boolean
     OpenOrCloseDescription(id: number): void
 }
 
-export default function TableItem({ id, result, command, isOpen, OpenOrCloseDescription }: TableItemProps) {
+export default function TableItemv2({ id, result, commands, isOpen, OpenOrCloseDescription }: TableItemProps) {
 
     return (
         <TouchableWithoutFeedback onPress={() => { OpenOrCloseDescription(id) }} style={{ height: "100%", width: "100%" }}>
@@ -22,13 +22,20 @@ export default function TableItem({ id, result, command, isOpen, OpenOrCloseDesc
                 {
                     isOpen ?
                         <View style={styles.command_container}>
-                            <Text style={[gStyles.text_conteiner, { margin: 10 }]}>{command}</Text>
+                            {
+                                commands.map((current) => {
+                                    return (
+                                        <Text key={current} style={[gStyles.text_conteiner, { margin: 10 }]}>{current}</Text>
+                                    )
+                                })
+
+                            }
                         </View>
                         :
                         <View />
                 }
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback >
     );
 }
 
