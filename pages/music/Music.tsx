@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Animated } from 'react-native';
 import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
@@ -29,11 +29,44 @@ export default function Music({ navigation }) {
 
     }
 
-    const OpenOrCloseDescription = (id: number) => {
+    const OpenOrCloseDescription = (id: number, fadeUpperAnim: Animated.Value, fadeLowerAnim: Animated.Value) => {
         const item = data.filter(item => item.id == id)[0]; //Эл. списка с ключом равному переменной id
+        if (item.isOpen) {
+
+            Animated.timing(fadeLowerAnim, {
+                useNativeDriver: false,
+                toValue: 0,
+                duration: 100
+            }).start(() => {
+                Animated.timing(fadeUpperAnim, {
+                    useNativeDriver: false,
+                    toValue: 20,
+                    duration: 100
+                }).start(() => { ChangeDescriptionState(id, item); });
+            });
+
+        }
+        else {
+            ChangeDescriptionState(id, item);
+            Animated.timing(fadeUpperAnim, {
+                useNativeDriver: false,
+                toValue: 0,
+                duration: 100
+            }).start(() => {
+                Animated.timing(fadeLowerAnim, {
+                    useNativeDriver: false,
+                    toValue: 1,
+                    duration: 100
+                }).start(() => { });
+            })
+        }
+    };
+
+    const ChangeDescriptionState = (id: number, item) => {
+
         item.isOpen = !item.isOpen;
         setData([item, ...data.filter(item => item.id != id)].sort(compareItemId))
-    };
+    }
 
     const renderItem = ({ item }) => (
         <TableItem

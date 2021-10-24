@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import config from './resources/config.json'
+import Header from './components/Header';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,10 @@ export default function Navigate() {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{
-                headerTitleStyle: { fontFamily: 'mta-bolt' }
+                headerTitleStyle: { fontFamily: 'mta-bolt' },
+                headerStyle: {
+                    backgroundColor: '#FFE076',
+                }
             }} >
                 <Stack.Screen
                     name="Главная"
