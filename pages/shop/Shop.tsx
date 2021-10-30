@@ -3,19 +3,28 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Animated } from 'react-native';
 import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
+import ListItem from '../../components/UI/ListItem';
 import Header from '../../components/Header';
 
-import { items } from '../../resources/content/speak-content.json'
+import { items } from '../../resources/content/shop-content.json'
 
 
-export default function Speak({ navigation }) {
+export default function Shop({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
-        return ({
-            id: index + 1,
-            isOpen: false,
-            result: current.result,
-            commands: current.commands
-        });
+        if (current.hasOwnProperty('paragraph')) {
+            return ({
+                id: index + 1,
+                paragraph: current.paragraph
+            })
+        }
+        else {
+            return ({
+                id: index + 1,
+                isOpen: false,
+                result: current.result,
+                commands: current.commands
+            });
+        }
     }));
 
     function compareItemId(a, b) {
@@ -67,16 +76,29 @@ export default function Speak({ navigation }) {
         item.isOpen = !item.isOpen;
         setData([item, ...data.filter(item => item.id != id)].sort(compareItemId))
     }
+    const openPage = (name) => navigation.navigate(name);
 
-    const renderItem = ({ item }) => (
-        <TableItem
-            id={item.id}
-            result={item.result}
-            commands={item.commands}
-            isOpen={item.isOpen}
-            OpenOrCloseDescription={OpenOrCloseDescription}
-        />
-    );
+    const renderItem = ({ item }) => {
+        if (item.hasOwnProperty('paragraph')) {
+            return (
+                <ListItem
+                    title={item.paragraph}
+                    openPage={openPage}
+                />
+            )
+        }
+        else {
+            return (
+                < TableItem
+                    id={item.id}
+                    result={item.result}
+                    commands={item.commands}
+                    isOpen={item.isOpen}
+                    OpenOrCloseDescription={OpenOrCloseDescription}
+                />
+            )
+        }
+    };
 
     return (
         <SafeAreaView style={styles.Home}>

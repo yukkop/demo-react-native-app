@@ -3,6 +3,8 @@ import React, { useRef } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Animated } from 'react-native';
 import { gStyles } from '../../styles/style';
 
+import InsetShadow from 'react-native-inset-shadow'
+
 export type TableItemProps = {
     id: number
     result: string
@@ -34,7 +36,9 @@ export default function TableItem({ id, result, commands, isOpen, OpenOrCloseDes
                 </Animated.View>
                 {
                     isOpen ?
+
                         <Animated.View style={[styles.command_container, { scaleY: fadeLowerAnim, scaleX: fadeLowerAnim }]}>
+
                             {
                                 commands.map((current) => {
                                     return (
@@ -58,6 +62,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#FFE076',
         borderRadius: 20,
+
+
     },
     command_container: {
         alignItems: 'flex-start',

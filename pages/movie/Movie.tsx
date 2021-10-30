@@ -5,7 +5,7 @@ import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
 
-import { items } from '../../resources/movie-content.json'
+import { items } from '../../resources/content/movie-content.json'
 
 
 export default function Movie({ navigation }) {

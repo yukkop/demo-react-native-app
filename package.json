@@ -8,6 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.5",
+    "@react-native-community/art": "^1.2.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.4",
     "expo": "~42.0.1",
@@ -18,6 +20,9 @@
     "react-i18next": "^11.12.0",
     "react-localize-redux": "^3.5.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-fs": "^2.18.0",
+    "react-native-inset-shadow": "^1.0.3",
+    "react-native-neomorph-shadows": "^1.1.2",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-svg": "^12.1.1",

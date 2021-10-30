@@ -5,7 +5,7 @@ import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
 
-import { items } from '../../resources/leisure-content.json'
+import { items } from '../../resources/content/leisure-content.json'
 
 
 export default function Leisure({ navigation }) {

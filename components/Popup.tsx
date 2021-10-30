@@ -9,14 +9,15 @@ export type PopupProps = {
 
 export default function Popup({ isPopupOpen, setIsPopupOpen }: PopupProps) {
 
-    const fadeAnim = useRef(new Animated.Value(0)).current;
+    const fadeAnim = useRef(new Animated.Value(1)).current;
+    const [isHide, setIsHide] = useState(true);
 
     const fadeIn = () => {
         Animated.timing(fadeAnim, {
             useNativeDriver: false,
             toValue: 1,
             duration: 700
-        }).start();
+        }).start(() => { });
     };
 
     const fadeOut = () => {
@@ -25,27 +26,27 @@ export default function Popup({ isPopupOpen, setIsPopupOpen }: PopupProps) {
             toValue: 0,
             duration: 700
 
-        }).start(() => { setIsPopupOpen(false) });
+        }).start(() => { < View /> });
     };
 
     return (
-        isPopupOpen ?
-
-            <View style={styles.context} >
-                {fadeIn()}
-                <Animated.View style={[styles.popup, { scaleX: fadeAnim, scaleY: fadeAnim }]}>
+        isPopupOpen ? (
+            fadeIn(),
+            < Animated.View style={[styles.context, { scaleX: fadeAnim, scaleY: fadeAnim }]} >
+                <View style={[styles.popup]}>
                     <Text style={styles.text_context}>{"Не забудьте активировать Станцию перед тем, как попросить Алису помочь вам. Для этого скажите «Алиса» или нажмите кнопку активации"}</Text>
                     <Text
                         onPress={() => {
-                            fadeOut()
+                            setIsPopupOpen(false)
                         }}
                         style={[styles.text_context, { marginTop: 10, fontFamily: 'mta-exbolt' }]}>
                         {"ОК"}
                     </Text>
-                </Animated.View>
-            </View >
-            :
-            < View />
+                </View>
+            </Animated.View >
+        )
+            : (fadeOut(), < View />)
+
     );
 }
 
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgba(0,0,0,0)'
+        backgroundColor: 'rgba(0,0,0,1)'
     },
     popup: {
         backgroundColor: '#6E39FF',

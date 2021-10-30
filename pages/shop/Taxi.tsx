@@ -3,12 +3,18 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Animated } from 'react-native';
 import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
-import Header from '../../components/Header';
+import ListItem from '../../components/UI/ListItem';
+import CircleButton from '../../components/UI/CircleButton';
+import Dialog from './../../components/Dialog'
+import config from './../../resources/config.json'
 
-import { items } from '../../resources/content/speak-content.json'
+import { items } from '../../resources/content/shop-taxi-content.json'
 
 
-export default function Speak({ navigation }) {
+export default function Shop({ navigation }) {
+
+    const [isDialogOpen, setDialogState] = useState(true);
+
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,
@@ -63,30 +69,53 @@ export default function Speak({ navigation }) {
     };
 
     const ChangeDescriptionState = (id: number, item) => {
-
         item.isOpen = !item.isOpen;
         setData([item, ...data.filter(item => item.id != id)].sort(compareItemId))
     }
+    const openPage = (name) => navigation.navigate(name);
 
-    const renderItem = ({ item }) => (
-        <TableItem
-            id={item.id}
-            result={item.result}
-            commands={item.commands}
-            isOpen={item.isOpen}
-            OpenOrCloseDescription={OpenOrCloseDescription}
-        />
-    );
+    const renderItem = ({ item }) => {
+        if (item.hasOwnProperty('paragraph')) {
+            return (
+                <ListItem
+                    title={item.paragraph}
+                    openPage={openPage}
+                />
+            )
+        }
+        else {
+            return (
+                < TableItem
+                    id={item.id}
+                    result={item.result}
+                    commands={item.commands}
+                    isOpen={item.isOpen}
+                    OpenOrCloseDescription={OpenOrCloseDescription}
+                />
+            )
+        }
+    };
 
     return (
         <SafeAreaView style={styles.Home}>
-            <StatusBar style="auto" />
-            <FlatList
+            <StatusBar style="auto" /><FlatList
                 style={{ flex: 5, marginTop: 10, marginRight: 10 }}
                 data={data}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
             />
+            <Dialog text={
+                "Алиса умеет вызывать такси. Она строит маршрут, называет цену и длительность поездки, находит машину и присылает детали заказа в приложение Яндекс. Оплатить поездку можно наличными или картой, привязанной к Яндекс ID. Для управления колонкой в приложении Яндекс используйте тот же аккаунт, что в Яндекс ID и в Яндекс.Такси."
+            }
+                isOpen={isDialogOpen}
+                setOpen={setDialogState}
+            />
+            <View
+                style={{ flex: 5, marginTop: 10, position: 'absolute', bottom: 20, right: 20 }}
+            >
+                <CircleButton isHide={isDialogOpen} Action={() => setDialogState(!isDialogOpen)} iconName={"exclamation"} />
+                <CircleButton isHide={isDialogOpen} Action={() => navigation.navigate(config.search)} iconName={"search"} />
+            </View>
         </SafeAreaView>
     )
 }

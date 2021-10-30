@@ -5,10 +5,10 @@ import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
 
-import { items } from '../../resources/content/speak-content.json'
+import { items } from '../../resources/content/clever-home-color-temperature-content.json'
 
 
-export default function Speak({ navigation }) {
+export default function OnOff({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,

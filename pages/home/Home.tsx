@@ -5,13 +5,14 @@ import { gStyles } from '../../styles/style';
 import ListItem from '../../components/UI/ListItem';
 import HomeHeader from './HomeHeader'
 import Popup from '../../components/Popup';
+import Dialog from '../../components/Dialog';
 import CircleButton from '../../components/UI/CircleButton'
 
 import config from './../../resources/config.json'
 
 
 export default function Home({ navigation }) {
-    const [isPopupOpen, setIsPopupOpen] = useState(true);
+    const [isDialogOpen, setDialogOpen] = useState(true);
 
     const [chapterList, ListOfCharpter] = useState([
         { title: config.music, id: 1 },
@@ -21,19 +22,18 @@ export default function Home({ navigation }) {
         { title: config.phone, id: 5 },
         { title: config.reminder, id: 6 },
         { title: config.shop, id: 7 },
-        { title: config.clever, id: 8 }
-    ]);
-
-    const [buttons, sertButtons] = useState([
-        { icon: require('./../../assets/cog.png'), id: 0 },
-        { icon: require('./../../assets/cog.png'), id: 1 }
+        { title: config['clever-home'], id: 8 }
     ]);
 
     const openPage = (name) => navigation.navigate(name);
 
     const renderItem = ({ item }) => (
-        <ListItem title={item.title} name={item.name} openPage={openPage} />
+        <ListItem title={item.title} openPage={openPage} />
     );
+
+    const setDialogState = (state) => {
+        setDialogOpen(state);
+    }
 
     return (
         <SafeAreaView style={styles.Home}>
@@ -47,18 +47,18 @@ export default function Home({ navigation }) {
             />
             <View style={styles.floor}>
             </View>
-            <Popup isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
-            <FlatList
-                style={{ flex: 5, marginTop: 10, position: 'absolute', bottom: 20, right: 20 }}
-                data={buttons}
-                renderItem={({ item }) => {
-                    return (
-                        <CircleButton icon={item.icon} />
-                    );
-                }}
-                keyExtractor={item => item.id.toString()}
-                showsVerticalScrollIndicator={false}
+            <Dialog text={
+                "Не забудьте активировать Станцию перед тем, как попросить Алису помочь вам. Для этого скажите «Алиса» или нажмите кнопку активации"
+            }
+                isOpen={isDialogOpen}
+                setOpen={setDialogState}
             />
+            <View
+                style={{ flex: 5, marginTop: 10, position: 'absolute', bottom: 20, right: 20 }}
+            >
+                <CircleButton isHide={isDialogOpen} Action={() => setDialogState(!isDialogOpen)} iconName={"exclamation"} />
+                <CircleButton isHide={isDialogOpen} Action={() => navigation.navigate(config.search)} iconName={"search"} />
+            </View>
         </SafeAreaView>
     )
 }
