@@ -7,6 +7,8 @@ import Header from '../../components/Header';
 
 import { items } from '../../resources/content/music-content.json'
 
+import CircleButton from '../../components/UI/CircleButton';
+import config from './../../resources/config.json';
 
 export default function Music({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
@@ -87,6 +89,11 @@ export default function Music({ navigation }) {
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
             />
+            <View
+                style={{ flex: 5, marginTop: 10, position: 'absolute', bottom: 20, right: 20 }}
+            >
+                <CircleButton isHide={false} Action={() => navigation.navigate(config.search)} iconName={"search"} />
+            </View>
         </SafeAreaView>
     )
 }

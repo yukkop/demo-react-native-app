@@ -8,6 +8,8 @@ import Header from '../../components/Header';
 
 import { items } from '../../resources/content/shop-content.json'
 
+import CircleButton from '../../components/UI/CircleButton';
+import config from './../../resources/config.json';
 
 export default function Shop({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
@@ -26,17 +28,6 @@ export default function Shop({ navigation }) {
             });
         }
     }));
-
-    function compareItemId(a, b) {
-        if (a.id < b.id) {
-            return -1;
-        }
-        if (b.id < a.id) {
-            return 1;
-        }
-        return 0;
-
-    }
 
     const OpenOrCloseDescription = (id: number, fadeUpperAnim: Animated.Value, fadeLowerAnim: Animated.Value) => {
         const item = data.filter(item => item.id == id)[0]; //Эл. списка с ключом равному переменной id
@@ -72,9 +63,9 @@ export default function Shop({ navigation }) {
     };
 
     const ChangeDescriptionState = (id: number, item) => {
-
+        let index = data.indexOf(item)
         item.isOpen = !item.isOpen;
-        setData([item, ...data.filter(item => item.id != id)].sort(compareItemId))
+        setData([...data.slice(0, index), item, ...data.slice(index + 1, data.length + 1)])
     }
     const openPage = (name) => navigation.navigate(name);
 
@@ -109,6 +100,11 @@ export default function Shop({ navigation }) {
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
             />
+            <View
+                style={{ flex: 5, marginTop: 10, position: 'absolute', bottom: 20, right: 20 }}
+            >
+                <CircleButton isHide={false} Action={() => navigation.navigate(config.search)} iconName={"search"} />
+            </View>
         </SafeAreaView>
     )
 }

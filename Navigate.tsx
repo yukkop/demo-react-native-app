@@ -15,6 +15,12 @@ import Color from './pages/clever home/Color';
 import Temperature from './pages/clever home/Temperature';
 import WorkType from './pages/clever home/WorkType'
 import Search from './pages/search/Search';
+import DelayCommandExecution from './pages/clever home/DelayCommandExecution';
+import FindOutTheStatusOfTheBulb from './pages/clever home/FindOutTheStatusOfTheBulb'
+import OnOffTV from './pages/clever home/OnOffTV';
+import OperateConditioner from './pages/clever home/OperateConditioner';
+import ControlTV from './pages/clever home/ControlTV';
+import ManageAddedDevice from './pages/clever home/ManageAddedDevice';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -92,6 +98,30 @@ export default function Navigate() {
                 <Stack.Screen
                     name={config['clever-home-work-type']}
                     component={WorkType}
+                />
+                <Stack.Screen
+                    name={config['clever-home-delay-command-execution']}
+                    component={DelayCommandExecution}
+                />
+                <Stack.Screen
+                    name={config['clever-home-find-out-the-status-of-the-bulb']}
+                    component={FindOutTheStatusOfTheBulb}
+                />
+                <Stack.Screen
+                    name={config['clever-home-on-off-tv']}
+                    component={OnOffTV}
+                />
+                <Stack.Screen
+                    name={config['clever-home-operate-conditioner']}
+                    component={OperateConditioner}
+                />
+                <Stack.Screen
+                    name={config['clever-home-control-tv']}
+                    component={ControlTV}
+                />
+                <Stack.Screen
+                    name={config['clever-home-manage-added-device']}
+                    component={ManageAddedDevice}
                 />
                 <Stack.Screen
                     name={config.search}

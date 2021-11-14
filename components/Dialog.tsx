@@ -7,7 +7,7 @@ export type ButtonProps = {
     text: string
 }
 
-export default function CircleButton({ isOpen, setOpen, text }: ButtonProps) {
+export default function Dialog({ isOpen, setOpen, text }: ButtonProps) {
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const [hide, setHide] = useState(false)
 

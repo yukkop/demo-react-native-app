@@ -4,11 +4,13 @@ import { SafeAreaView, StyleSheet, Text, View, FlatList, Animated } from 'react-
 import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
+import CircleButton from '../../components/UI/CircleButton';
 
 import { items } from '../../resources/content/clever-home-color-content.json'
 
+import config from './../../resources/config.json';
 
-export default function OnOff({ navigation }) {
+export default function Color({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,
@@ -87,6 +89,11 @@ export default function OnOff({ navigation }) {
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
             />
+            <View
+                style={{ flex: 5, marginTop: 10, position: 'absolute', bottom: 20, right: 20 }}
+            >
+                <CircleButton isHide={false} Action={() => navigation.navigate(config.search)} iconName={"search"} />
+            </View>
         </SafeAreaView>
     )
 }

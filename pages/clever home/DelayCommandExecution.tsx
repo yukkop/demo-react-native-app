@@ -6,11 +6,11 @@ import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
 import CircleButton from '../../components/UI/CircleButton';
 
-import { items } from '../../resources/content/clever-home-brightness-content.json';
+import { items } from '../../resources/content/clever-home-delay-command-execution.json'
 
 import config from './../../resources/config.json';
 
-export default function Brightness({ navigation }) {
+export default function DelayCommandExecution({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,

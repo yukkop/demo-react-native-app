@@ -4,13 +4,13 @@ import { SafeAreaView, StyleSheet, Text, View, FlatList, Animated } from 'react-
 import { gStyles } from '../../styles/style';
 import TableItem from '../../components/UI/TableItem';
 import Header from '../../components/Header';
+
+import { items } from '../../resources/content/clever-home-operate-conditioner.json'
+
 import CircleButton from '../../components/UI/CircleButton';
-
-import { items } from '../../resources/content/clever-home-brightness-content.json';
-
 import config from './../../resources/config.json';
 
-export default function Brightness({ navigation }) {
+export default function OperateConditioner({ navigation }) {
     const [data, setData] = useState(items.map((current, index) => {
         return ({
             id: index + 1,

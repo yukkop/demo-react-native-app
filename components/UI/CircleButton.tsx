@@ -7,7 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import ExclamationSolid from './exclamation-solid';
 
 export type ButtonProps = {
-    isHide: boolean
+    isHide: boolean,
     iconName: any,
     Action(): void
 }
