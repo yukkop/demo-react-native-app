@@ -1,9 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, View, StatusBar, Button } from 'react-native';
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 import Navigate from './Navigate';
+import BannerAd from "./BannerAd";
 
 const fonts = () => Font.loadAsync({
   'mt-bolt': require('./assets/fonts/Montserrat-Bold.ttf'),
@@ -14,11 +15,19 @@ const fonts = () => Font.loadAsync({
 })
 
 export default function App() {
+  const [showBanner, setShowBanner] = useState(false);
   const [font, setFont] = useState(false);
+
+
 
   if (font) {
     return (
-      <Navigate />
+      [
+        <Navigate />,
+        <View style={{ height: 60, backgroundColor: '#fafafa' }}>
+          <BannerAd />
+        </View>
+      ]
     );
   }
   else {
@@ -30,4 +39,4 @@ export default function App() {
       />
     );
   }
-}
+};

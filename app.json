@@ -24,7 +24,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.brands.alisaDocs"
+      "package": "com.brands.alisaDocs",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-6569834700270259~2786715408"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

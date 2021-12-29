@@ -6,12 +6,23 @@ import ListItem from '../../components/UI/ListItem';
 import HomeHeader from './HomeHeader'
 import Popup from '../../components/Popup';
 import Dialog from '../../components/Dialog';
-import CircleButton from '../../components/UI/CircleButton'
+import CircleButton from '../../components/UI/CircleButton';
+import BannerAd from "./../../BannerAd";
+import { AdMobInterstitial } from "expo-ads-admob";
 
 import config from './../../resources/config.json'
 
 
 export default function Home({ navigation }) {
+    let counter = 2;
+    const counterMax = 3;
+
+    const initInterstitialAds = async () => {
+        await AdMobInterstitial.setAdUnitID("ca-app-pub-3940256099942544/1033173712");
+        await AdMobInterstitial.requestAdAsync();
+        await AdMobInterstitial.showAdAsync();
+    };
+
     const [isDialogOpen, setDialogOpen] = useState(true);
 
     const [chapterList, ListOfCharpter] = useState([
@@ -25,7 +36,15 @@ export default function Home({ navigation }) {
         { title: config['clever-home'], id: 8 }
     ]);
 
-    const openPage = (name) => navigation.navigate(name);
+    const openPage = (name) => {
+        counter += 1;
+        if (counter == counterMax) {
+            counter = 0;
+            initInterstitialAds();
+        }
+        console.log(counter);
+        navigation.navigate(name)
+    };
 
     const renderItem = ({ item }) => (
         <ListItem title={item.title} openPage={openPage} />
