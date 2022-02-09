@@ -103,5 +103,5 @@ const styles = StyleSheet.create({
     },
     floor: {
         height: '8%',
-    },
+    }
 });
